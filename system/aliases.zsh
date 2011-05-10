@@ -9,5 +9,6 @@ then
   alias la='gls -A --color'
 fi
 
-# github propane hax
-alias propane=`sh ~/Dropbox/GitHub/propane/install.sh`
+function cdd() {
+  cd "/Users/piotr/Development/$*"
+}
