@@ -11,3 +11,5 @@ alias bu='bundle update'
 alias migrate='rake db:migrate db:test:clone'
 
 alias s="ps aux | grep \"[s]cript/rails\" || echo \"You're not running any, dawg.\""
+
+alias watch="watchr ~/.watchr/rails.rb"
