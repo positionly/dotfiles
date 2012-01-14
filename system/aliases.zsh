@@ -10,5 +10,5 @@ then
 fi
 
 function cdd() {
-  cd "/Users/piotrek/Development/$*"
+  cd "/Users/piotr/Development/$*"
 }
