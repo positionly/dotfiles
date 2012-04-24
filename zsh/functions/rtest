@@ -1,5 +1,5 @@
 #
 # Rake test with autocompletion
-# Usage: rtest units
+# Usage: rtest units <tab>
 #
 rake test:$1 TEST=$2;
