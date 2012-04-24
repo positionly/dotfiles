@@ -1,0 +1,9 @@
+#compdef rtest
+
+#
+# Autocompletion for rake test.
+# Usage:
+#   rtest units <tab>
+#
+
+compadd -P test/ -S _test.rb `ls test/**/*_test.rb | sed -E "s/test\/|_test\.rb//g"`
