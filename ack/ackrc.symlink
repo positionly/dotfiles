@@ -10,6 +10,9 @@
 --type-set=bin=.pdf
 --nobin
 
+--type-set=jsmin=.min.js
+--nojsmin
+
 --ignore-dir=vendor
 --ignore-dir=log
 --ignore-dir=tmp
