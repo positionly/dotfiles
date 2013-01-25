@@ -21,9 +21,9 @@ git_dirty() {
   else
     if [[ "$st" =~ ^nothing ]]
     then
-      echo "on %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
+      echo " %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
     else
-      echo "on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
+      echo " %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
     fi
   fi
 }
@@ -60,7 +60,7 @@ directory_name(){
 }
 
 #export PROMPT=$'\n%{$fg[white]%}$(whoami)@$(networksetup -getcomputername)%{$reset_color%}$(git_dirty)in $(directory_name) \n %{$fg[yellow]%}%(!.#.⚡)%{$reset_color%} '
-export PROMPT=$'\n%{$fg[white]%}$(whoami): $(directory_name)%{$reset_color%}$(git_dirty)%{$fg[yellow]%}%(!.#.⚡)%{$reset_color%} '
+export PROMPT=$'\n%{$fg[white]%}$(whoami): $(directory_name)%{$reset_color%}$(git_dirty)%{$fg[yellow]%}%(!.#. ›)%{$reset_color%} '
 export RPROMPT="$(rb_prompt)"
 
 precmd() {
