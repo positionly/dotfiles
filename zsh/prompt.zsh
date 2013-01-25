@@ -40,9 +40,9 @@ unpushed () {
 need_push () {
   if [[ $(unpushed) == "" ]]
   then
-    echo "%{$fg[green]%}✔%{$reset_color%}"
+    echo " "
   else
-    echo "%{$fg[red]%}✗%{$reset_color%}"
+    echo " with %{$fg_bold[magenta]%}unpushed%{$reset_color%} "
   fi
 }
 
@@ -60,7 +60,7 @@ directory_name(){
 }
 
 #export PROMPT=$'\n%{$fg[white]%}$(whoami)@$(networksetup -getcomputername)%{$reset_color%}$(git_dirty)in $(directory_name) \n %{$fg[yellow]%}%(!.#.⚡)%{$reset_color%} '
-export PROMPT=$'\n%{$fg[white]%}$(whoami): $(directory_name)%{$reset_color%}$(git_dirty)%{$fg[yellow]%}%(!.#. ›)%{$reset_color%} '
+export PROMPT=$'\n%{$fg[white]%}$(whoami): $(directory_name)%{$reset_color%}$(git_dirty)$(need_push)%{$fg[yellow]%}%(!.#.›)%{$reset_color%} '
 export RPROMPT="$(rb_prompt)"
 
 precmd() {
