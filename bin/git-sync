@@ -1,30 +1,31 @@
-#!/bin/sh
+#!/bin/zsh
 
 git_branch() {
-  echo $(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
+  branch=$(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
 
 git_dirty() {
   st=$(git status 2>/dev/null | tail -n 1)
+
   if [[ $st == "" ]]
   then
-    return 1
+    dirty="no"
   else
     if [[ "$st" =~ ^nothing ]]
     then
-      return 1
+      dirty="no"
     else
-      return 0
+      dirty="yes"
     fi
   fi
 }
 
-dirty=$(git_dirty)
-branch=$(git_branch)
+git_dirty
+git_branch
 
 echo "\n"
 
-if $dirty; then
+if [[ $dirty == "yes" ]]; then
   echo "  Dirty branch, stashing...\n"
   git stash
 else
@@ -39,7 +40,7 @@ if git pull --rebase origin $branch; then
   git push origin $branch
 fi
 
-if $dirty; then
+if [[ $dirty == "yes" ]]; then
   echo "  Applying stashed changes\n"
   git stash apply
 fi
