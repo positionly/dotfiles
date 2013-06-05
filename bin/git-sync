@@ -1,0 +1,47 @@
+#!/bin/sh
+
+git_branch() {
+  echo $(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
+}
+
+git_dirty() {
+  st=$(git status 2>/dev/null | tail -n 1)
+  if [[ $st == "" ]]
+  then
+    return 1
+  else
+    if [[ "$st" =~ ^nothing ]]
+    then
+      return 1
+    else
+      return 0
+    fi
+  fi
+}
+
+dirty=$(git_dirty)
+branch=$(git_branch)
+
+echo "\n"
+
+if $dirty; then
+  echo "  Dirty branch, stashing...\n"
+  git stash
+else
+  echo "  Nothing to stash"
+fi
+
+echo "\n"
+
+echo "  Pulling & rebasing $branch\n"
+if git pull --rebase origin $branch; then
+  echo "  Pushing changes\n"
+  git push origin $branch
+fi
+
+if $dirty; then
+  echo "  Applying stashed changes\n"
+  git stash apply
+fi
+
+echo "\n"
