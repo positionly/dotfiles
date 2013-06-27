@@ -49,7 +49,7 @@ need_push () {
 rb_prompt(){
   if (( $+commands[rbenv] ))
   then
-    echo "%{$fg_bold[blue]%}ruby $(rbenv version-name)%{$reset_color%}"
+    echo "%{$fg_bold[blue]%}$(rbenv version-name)%{$reset_color%}"
   else
     echo ""
   fi
