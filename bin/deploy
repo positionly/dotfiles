@@ -1,6 +1,10 @@
 #!/bin/sh
 #
 # Merges master to $env and deploys changes
+#
+# Usage:
+#   deploy staging
+#   deploy staging migrations
 
 if [ "$1" == "" ] ; then
   echo "No environment specified"
