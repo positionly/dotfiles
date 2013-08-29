@@ -19,5 +19,5 @@ else
   bundle exec cap $1 deploy:$2
 fi
 
-
+bundle exec cap $1 deploy:cleanup
 
