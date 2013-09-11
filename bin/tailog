@@ -1,3 +1,5 @@
 #!/bin/sh
 
+# Tails rails development log excluding asset-related lines.
+
 tail -f log/development.log | grep -vE "(^\s*$|asset)"
