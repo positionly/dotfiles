@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+
+SYNC_COLOR_YELLOW="\033[33m"
+SYNC_COLOR_GREEN="\033[32m"
+SYNC_COLOR_NONE="\033[0m"
 
 git_branch() {
   branch=$(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
@@ -6,7 +10,6 @@ git_branch() {
 
 git_dirty() {
   st=$(git status 2>/dev/null | tail -n 1)
-
   if [[ $st == "" ]]
   then
     dirty="no"
@@ -23,26 +26,25 @@ git_dirty() {
 git_dirty
 git_branch
 
-echo "\n"
-
 if [[ $dirty == "yes" ]]; then
-  echo "  Dirty branch, stashing...\n"
+  echo -e "\n"
+  echo -e "${SYNC_COLOR_YELLOW}Dirty branch, stashing ...${SYNC_COLOR_NONE}"
   git stash
-else
-  echo "  Nothing to stash"
 fi
 
-echo "\n"
+echo -e "\n"
 
-echo "  Pulling & rebasing $branch\n"
+echo -e "${SYNC_COLOR_GREEN}Pulling and rebasing $branch ${SYNC_COLOR_NONE}"
 if git pull --rebase origin $branch; then
-  echo "  Pushing changes\n"
+  echo -e "\n"
+  echo -e "${SYNC_COLOR_GREEN}Pushing changes ${SYNC_COLOR_NONE}"
   git push origin $branch
 fi
 
 if [[ $dirty == "yes" ]]; then
-  echo "  Applying stashed changes\n"
+  echo -e "\n"
+  echo -e "${SYNC_COLOR_GREEN}Applying stashed changes${SYNC_COLOR_NONE}"
   git stash apply
 fi
 
-echo "\n"
+echo -e "\n"
