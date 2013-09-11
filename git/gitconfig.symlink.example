@@ -18,7 +18,7 @@
         ui = true
 [core]
         excludesfile = ~/.gitignore
-        editor = mate -w
+        editor = subl -w
 [apply]
         whitespace = nowarn
 [mergetool]
