@@ -15,5 +15,7 @@ fi
 
 # Install homebrew packages
 brew install grc coreutils spark
+brew install rbenv
+brew install ruby-build
 
 exit 0
